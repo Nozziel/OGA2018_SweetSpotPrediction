@@ -4,3 +4,5 @@
 
 /Notebooks/.ipynb_checkpoints
 /.vs
+/Notebooks/RegressionData.csv
+/Notebooks/ClassificationData.csv
