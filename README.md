@@ -2,7 +2,11 @@
 Predict sweet spots for new wells
 
 ### Team Members:
+* Alan Wilson
 * Geoff Chambers - geoffsch
+* Marco van der Linden - Nozziel
+* Maxim Kotenev
+* Rowan Haddad - Hadrow
 
 ### Requirements:
 Conda environment oga2018
