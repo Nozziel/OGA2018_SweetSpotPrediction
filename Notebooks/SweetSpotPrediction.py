@@ -34,3 +34,28 @@ def plot_feature_importances(model,features):
     plt.ylabel("Feature")
     plt.ylim(-1, n_features)
     return
+
+def plot_map(df, map_column):
+    """
+    Pull single map column from dataframe and plot
+    Arguments:
+        df - dataframe, with columns XPos, YPos, and maps
+        map_column - str, column name to map
+    """
+    
+    # Reshape dataframe with desired column values, get geometry
+    df_plot = df.pivot(index='YPos', columns='XPos', values=map_column)
+    x,y = np.meshgrid(df_plot.columns.values, df_plot.index.values)
+    
+    # Plot
+    fig, ax = plt.subplots(figsize=(12,8))
+    cf = ax.contourf(x, y, df_plot, cmap='inferno')
+    c = ax.contour(x, y, df_plot, colors='black')
+    ax.set_aspect('equal', 'box')
+    fig.tight_layout()
+    fig.colorbar(cf, shrink=0.8);
+    ax.set_xlabel('x [m]')
+    ax.set_ylabel('y [m]')
+    ax.set_title(map_column, fontsize=16)
+    plt.show();
+    return
