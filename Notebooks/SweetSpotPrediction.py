@@ -9,6 +9,11 @@ def ReportMetrics(model, X_train, X_test, y_train, y_test, y_pred_test):
     weights_train = compute_sample_weight(class_weight='balanced', y=y_train)
     weights_test = compute_sample_weight(class_weight='balanced', y=y_test)
 
+    print("Weighted accuracy on training set: {:.3f}".format(model.score(X_train, y_train, sample_weight=weights_train)))
+    print("Weighted accuracy on test set: {:.3f}".format(model.score(X_test, y_test,weights_test)))
+
+    print("")
+
     # Model Precision: number of positive predictions divided by the total number of positive class values predicted.
     print("Precision: {:.3f}".format(metrics.precision_score(y_test, y_pred_test)))
 
@@ -40,12 +45,12 @@ def plot_map(df, map_column):
     
     # Reshape dataframe with desired column values, get geometry
     df_plot = df.pivot(index='YPos', columns='XPos', values=map_column)
-    x,y = np.meshgrid(df_plot.columns.values, df_plot.index.values)
+    X,Y = np.meshgrid(df_plot.columns.values, df_plot.index.values)
     
     # Plot
     fig, ax = plt.subplots(figsize=(12,8))
-    cf = ax.contourf(x, y, df_plot, cmap='plasma')
-    c = ax.contour(x, y, df_plot, colors='black')
+    cf = ax.contourf(X, Y, df_plot, cmap='plasma')
+    c = ax.contour(X, Y, df_plot, colors='black')
     ax.set_aspect('equal', 'box')
     fig.tight_layout()
     fig.colorbar(cf, shrink=0.8);
