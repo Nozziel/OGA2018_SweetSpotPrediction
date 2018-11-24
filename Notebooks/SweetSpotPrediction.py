@@ -1,6 +1,7 @@
 import pandas as pd 
 import numpy as np
 import matplotlib.pyplot as plt
+import scipy.interpolate as spi
 
 def ReportMetrics(model, X_train, X_test, y_train, y_test, y_pred_test):
     from sklearn.utils.class_weight import compute_sample_weight
@@ -59,3 +60,22 @@ def plot_map(df, map_column):
     ax.set_title(map_column, fontsize=16)
     plt.show();
     return
+
+def make_regular(df, name, spacing):
+    """
+    Takes dataframe for single map (XPos, YPos, name columns), interpolates it
+    to regular rectangle with defined spacing
+    """
+    
+    # Desired target grid skeleton 
+    xmin, xmax = df.XPos.min(), df.XPos.max()
+    ymin, ymax = df.YPos.min(), df.YPos.max()
+    xtarget = np.arange(spacing*(xmin//spacing), spacing*(xmax//spacing + 2), spacing)
+    ytarget = np.arange(spacing*(ymin//spacing), spacing*(ymax//spacing + 2), spacing)
+    Xt, Yt = np.meshgrid(xtarget, ytarget)
+    
+    # Interpolate, and form into dataframe
+    df_int = spi.griddata((df.XPos, df.YPos), df[name], (Xt, Yt), method='cubic')
+    df_reg = pd.DataFrame({'XPos':Xt.flatten(), 'YPos':Yt.flatten(), name:df_int.flatten()})
+    
+    return df_reg
