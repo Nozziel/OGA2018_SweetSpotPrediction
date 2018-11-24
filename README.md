@@ -7,5 +7,6 @@ Predict sweet spots for new wells
 ### Requirements:
 Conda environment oga2018
 
-To build from YAML file:\n
+To build from YAML file:
+
 conda env create --file env.yml
