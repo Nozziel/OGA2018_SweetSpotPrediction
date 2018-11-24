@@ -13,4 +13,4 @@ Conda environment oga2018
 
 To build from YAML file:
 
-conda env create --file env.yml
+conda env create --file env_oga2018.yml
