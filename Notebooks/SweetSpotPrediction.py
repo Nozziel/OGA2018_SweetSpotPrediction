@@ -32,22 +32,41 @@ def plot_feature_importances(model,features):
     plt.ylim(-1, n_features)
     return
 
-def plot_map(df, map_column):
+def plot_map(df, map_column, dtype='numeric'):
     """
     Pull single map column from dataframe and plot
     Arguments:
         df - dataframe, with columns XPos, YPos, and maps
         map_column - str, column name to map
+        dtype - str, data type of map, either 'numeric' for contour plot or 'cat' for bitmap
     """
     
     # Reshape dataframe with desired column values, get geometry
     df_plot = df.pivot(index='YPos', columns='XPos', values=map_column)
-    X,Y = np.meshgrid(df_plot.columns.values, df_plot.index.values)
     
-    # Plot
     fig, ax = plt.subplots(figsize=(12,8))
-    cf = ax.contourf(X, Y, df_plot, cmap='plasma')
-    c = ax.contour(X, Y, df_plot, colors='black')
+    
+    # Prepare data and plot for continuous numerical input
+    if dtype == 'numeric':
+        
+        X,Y = np.meshgrid(df_plot.columns.values, df_plot.index.values)
+        
+        cf = ax.contourf(X, Y, df_plot, cmap='plasma')
+        c = ax.contour(X, Y, df_plot, colors='black')
+        
+    elif dtype == 'cat':
+        
+        xmin, xmax = df_plot.columns.values[0], df_plot.columns.values[-1]
+        ymin, ymax = df_plot.index.values[0], df_plot.index.values[-1]
+        dx = (xmax - xmin) / (len(df_plot.columns) - 1)
+        dy = (ymax - ymin) / (len(df_plot.index) - 1)
+        
+        cf = ax.imshow(df_plot, cmap='plasma', origin='lower', extent=(xmin-0.5*dx, xmax+0.5*dx, ymin-0.5*dy, ymax+0.5*dy))
+        
+    else:
+        raise ValueError("dtype argument must be either 'numeric' or 'cat'")
+    
+    # Adjust plot settings
     ax.set_aspect('equal', 'box')
     fig.tight_layout()
     fig.colorbar(cf, shrink=0.8);
