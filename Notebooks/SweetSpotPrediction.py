@@ -10,11 +10,7 @@ def ReportMetrics(model, X_train, X_test, y_train, y_test, y_pred_test):
     weights_train = compute_sample_weight(class_weight='balanced', y=y_train)
     weights_test = compute_sample_weight(class_weight='balanced', y=y_test)
 
-    print("Weighted accuracy on training set: {:.3f}".format(model.score(X_train, y_train, sample_weight=weights_train)))
-    print("Weighted accuracy on test set: {:.3f}".format(model.score(X_test, y_test,weights_test)))
-
-    print("")
-
+  
     # Model Precision: number of positive predictions divided by the total number of positive class values predicted.
     print("Precision: {:.3f}".format(metrics.precision_score(y_test, y_pred_test)))
 
