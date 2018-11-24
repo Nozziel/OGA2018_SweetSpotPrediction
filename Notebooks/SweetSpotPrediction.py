@@ -49,7 +49,7 @@ def plot_map(df, map_column):
     
     # Plot
     fig, ax = plt.subplots(figsize=(12,8))
-    cf = ax.contourf(x, y, df_plot, cmap='inferno')
+    cf = ax.contourf(x, y, df_plot, cmap='plasma')
     c = ax.contour(x, y, df_plot, colors='black')
     ax.set_aspect('equal', 'box')
     fig.tight_layout()
