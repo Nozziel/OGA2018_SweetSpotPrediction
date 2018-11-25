@@ -49,13 +49,19 @@ def plot_map(df, map_column, dtype='numeric', figax=None):
         fig, ax = plt.subplots(figsize=(12,8))
     else:
         fig, ax = figax
+        
+    # Select colour map
+    if 'Uncertainty' in map_column:
+        cm = 'summer'
+    else:
+        cm = 'plasma'
     
     # Prepare data and plot for continuous numerical input
     if dtype == 'numeric':
         
         X,Y = np.meshgrid(df_plot.columns.values, df_plot.index.values)
         
-        cf = ax.contourf(X, Y, df_plot, cmap='plasma')
+        cf = ax.contourf(X, Y, df_plot, cmap=cm)
         c = ax.contour(X, Y, df_plot, colors='black')
         
     elif dtype == 'cat':
@@ -65,7 +71,7 @@ def plot_map(df, map_column, dtype='numeric', figax=None):
         dx = (xmax - xmin) / (len(df_plot.columns) - 1)
         dy = (ymax - ymin) / (len(df_plot.index) - 1)
         
-        cf = ax.imshow(df_plot, cmap='plasma', origin='lower', extent=(xmin-0.5*dx, xmax+0.5*dx, ymin-0.5*dy, ymax+0.5*dy))
+        cf = ax.imshow(df_plot, cmap=cm, origin='lower', extent=(xmin-0.5*dx, xmax+0.5*dx, ymin-0.5*dy, ymax+0.5*dy))
         
     else:
         raise ValueError("dtype argument must be either 'numeric' or 'cat'")
