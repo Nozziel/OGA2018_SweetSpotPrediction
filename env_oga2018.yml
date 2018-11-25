@@ -108,4 +108,4 @@ dependencies:
   - scikit-learn=0.20.0=py37heebcf9a_1
   - scipy=1.1.0=py37h4f6bf74_1
   - vs2015_runtime=14.15.26706=h3a45250_0
-prefix: C:\Users\geoff\AppData\Local\conda\conda\envs\oga2018
+  
