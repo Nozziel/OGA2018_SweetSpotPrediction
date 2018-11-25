@@ -94,3 +94,38 @@ def make_regular(df, name, spacing):
     df_reg = pd.DataFrame({'XPos':Xt.flatten(), 'YPos':Yt.flatten(), name:df_int.flatten()})
     
     return df_reg
+
+def random_perturb(x, y, z, mean_pert=1, variability=0.1):
+    """
+    Function to apply random perturbation to z.
+    
+    Arguments:
+        x - pandas series of x values
+        y - pandas series of y values
+        z - pandas series of z values
+        mean_pert - overall multiplier, if None will select randomly between 0.8 and 1.2
+        variability - max perturbation
+        
+    Returns:
+        zscaled - pandas series of scaled z values
+    """
+    
+    # Compute mean_pert if necessary
+    if mean_pert is None:
+        mean_pert = 0.8 + 0.4 * np.random.random()
+    
+    # Compute random phases
+    xphase = 2 * np.pi * np.random.random()
+    yphase = 2 * np.pi * np.random.random()
+    
+    # Compute frequencies (1/2 wavelength for extent of map)
+    xmin, xmax = x.min(), x.max()
+    ymin, ymax = y.min(), y.max()
+    xfreq = np.pi / (xmax - xmin)
+    yfreq = np.pi / (ymax - ymin)
+    
+    # Compute multiplier & scaled map
+    multiplier = mean_pert + variability * np.sin(xfreq*(x-xmin) + xphase) * np.sin(yfreq*(y-ymin) + yphase)
+    zscaled = multiplier * z
+    
+    return zscaled
