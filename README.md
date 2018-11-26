@@ -1,5 +1,9 @@
 # OGA2018_SweetSpotPrediction
-Predict sweet spots for new wells
+Agile/OGA Hackathon, London 24-25/11/2018.
+Team: SweetSpot SweatShop
+https://events.agilescientific.com/event/oga-lon-hackathon
+
+Predict reservoir sweet spots based on assortment of reservoir property maps.
 
 ### Team Members:
 * Alan Wilson
