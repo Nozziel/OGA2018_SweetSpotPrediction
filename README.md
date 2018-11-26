@@ -1,11 +1,11 @@
 # OGA2018_SweetSpotPrediction
-Agile/OGA Hackathon, London 24-25/11/2018.
+Predict reservoir sweet spots based on assortment of reservoir property maps.
 
-Team: SweetSpot SweatShop
+Agile/OGA Hackathon, London 24-25/11/2018.
 
 https://events.agilescientific.com/event/oga-lon-hackathon
 
-Predict reservoir sweet spots based on assortment of reservoir property maps.
+Team: SweetSpot SweatShop
 
 ### Team Members:
 * Alan Wilson
