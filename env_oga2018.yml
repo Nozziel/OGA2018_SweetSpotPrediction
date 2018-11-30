@@ -17,6 +17,7 @@ dependencies:
   - decorator=4.3.0=py_0
   - entrypoints=0.2.3=py37_1002
   - freetype=2.9.1=he8b6a0d_1004
+  - graphviz=2.38.0=h6538335_1009
   - icu=58.2=vc14_0
   - idna=2.7=py37_1002
   - ipykernel=5.1.0=py37h39e3cac_1001
@@ -107,4 +108,4 @@ dependencies:
   - scikit-learn=0.20.0=py37heebcf9a_1
   - scipy=1.1.0=py37h4f6bf74_1
   - vs2015_runtime=14.15.26706=h3a45250_0
-prefix: C:\Users\geoff\AppData\Local\conda\conda\envs\oga2018
+  
